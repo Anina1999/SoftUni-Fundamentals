@@ -1,3 +1,42 @@
+//solve #1
+function fancyBarcodes(input) {
+    let countOfBarcodes = Number(input.shift());
+    let barcodePattern = /@#+(?<barcode>[A-Z][a-zA-Z0-9]{4,}[A-Z])@#+/g;
+
+    for (let line of input) {
+        let matches = line.matchAll(barcodePattern);
+        let found = false;
+
+        for (let match of matches) {
+            found = true;
+            let barcode = match.groups['barcode'];
+            let digits = barcode.match(/\d/g);
+            let productGroup = digits ? digits.join('') : '00';
+            console.log(`Product group: ${productGroup}`);
+        }
+
+        if (!found) {
+            console.log("Invalid barcode");
+        }
+    }
+}
+
+//fancyBarcode(["6",
+
+//"@###Val1d1teM@###",
+
+//"@#ValidIteM@#",
+
+//"##InvaliDiteM##",
+
+//"@InvalidIteM@",
+
+//"@#Invalid_IteM@#",
+
+//"@#ValiditeM@#"]);
+
+
+//solve #2
 function fancyBarcode(data) {
     let totalBarcodes = Number(data[0]);
 
@@ -22,17 +61,3 @@ function fancyBarcode(data) {
         }
     }
 }
-
-//fancyBarcode(["6",
-
-//"@###Val1d1teM@###",
-
-//"@#ValidIteM@#",
-
-//"##InvaliDiteM##",
-
-//"@InvalidIteM@",
-
-//"@#Invalid_IteM@#",
-
-//"@#ValiditeM@#"]);
