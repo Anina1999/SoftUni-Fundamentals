@@ -63,3 +63,35 @@ function bossRush(inputArr) {
         }
     }
 }
+
+
+//solve #3 (using two patterns for each part, by getting groups - SIMILAR as solve #2)
+function bossRush(inputArr) {
+    let numberOfInputs = Number(inputArr[0]);
+    let bossNamePattern = /^\|(?<bossName>[A-Z]{4,})\|$/;
+    let titlePattern = /^#(?<title>[A-Za-z]+ [A-Za-z]+)#$/;
+
+    for (let i = 1; i <= numberOfInputs; i++) {
+        let line = inputArr[i];
+        let [bossName, title] = line.split(':');
+
+        if (!line.includes(':')) {
+            console.log('Access denied!');
+            continue;
+        }
+
+        let bossMatch = bossName.match(bossNamePattern);
+        let titleMatch = title.match(titlePattern);
+
+        if (bossMatch && titleMatch) {
+            let name = bossMatch.groups.bossName;
+            let titt = titleMatch.groups.title;
+
+            console.log(`${name}, The ${titt}`);
+            console.log(`>> Strength: ${name.length}`);
+            console.log(`>> Armor: ${titt.length}`);
+        } else {
+            console.log('Access denied!');
+        }
+    }
+}
